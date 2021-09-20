@@ -3,7 +3,7 @@ language: java
 jdk:
   - openjdk15
 
-sudo: true
+sudo: false
 
 env:
   global:
