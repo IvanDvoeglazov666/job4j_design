@@ -21,16 +21,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     }
 
-    public static void main(String[] args) {
-        int[] num = {1, 2, 3, 4, 5, 6};
-        for (int i : num) {
-            if (num[i] % 2 == 1) {
-                System.out.println(num[i]);
-            }
-
-        }
-    }
-
     @Override
     public Integer next() {
         if (!hasNext()) {
