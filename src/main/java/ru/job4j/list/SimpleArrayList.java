@@ -1,9 +1,6 @@
 package ru.job4j.list;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleArrayList<T> implements List<T> {
 
@@ -13,8 +10,11 @@ public class SimpleArrayList<T> implements List<T> {
 
     private int modCount;
 
+
+
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
+
     }
 
     @Override
@@ -36,9 +36,10 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public T set(int index, T newValue) {
         T rsl = container[index];
-        for(T num : container) {
-            if(container[index].equals(num)) {
+        for (T num : container) {
+            if (container[index].equals(num)) {
                 container[index] = newValue;
+                break;
             }
         }
         return rsl;
@@ -69,14 +70,14 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
 
-            private int expectedModCount = modCount;
+            private final int expectedModCount = modCount;
             private int cursor = 0;
 
             @Override
             public boolean hasNext() {
-                if(expectedModCount != modCount) {
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return cursor < container.length && container[cursor] != null;
@@ -84,9 +85,9 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public T next() {
-                 if(!hasNext() || modCount == 0) {
-                     throw new NoSuchElementException();
-                 }
+                if (!hasNext() || modCount == 0) {
+                    throw new NoSuchElementException();
+                }
 
                 return container[cursor++];
             }
