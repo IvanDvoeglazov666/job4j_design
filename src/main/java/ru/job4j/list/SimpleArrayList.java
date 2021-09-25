@@ -14,7 +14,6 @@ public class SimpleArrayList<T> implements List<T> {
 
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
-
     }
 
     @Override
