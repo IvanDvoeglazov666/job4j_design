@@ -29,7 +29,6 @@ public final class MemStore<T extends Base> implements Store<T> {
         if (rsl) {
             mem.replace(id, model);
         }
-
         return rsl;
     }
 
