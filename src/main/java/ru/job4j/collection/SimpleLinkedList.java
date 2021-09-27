@@ -4,15 +4,15 @@ package ru.job4j.collection;
 import java.util.*;
 
 public class SimpleLinkedList<E> implements List<E> {
-    private final E[] container;
-    private int size;
+
+    private int size = 0;
     private Node<E> first;
     private Node<E> last;
     private int modCount;
-    private int length = 2;
 
     public SimpleLinkedList() {
-        this.container = (E[]) new Object[length];
+        this.first = new Node<>(null, null, last);
+        this.last = new Node<>(first, null, null);
     }
 
     private static class Node<E> {
@@ -20,60 +20,76 @@ public class SimpleLinkedList<E> implements List<E> {
         Node<E> next;
         Node<E> prev;
 
+        public E getItem() {
+            return item;
+        }
+
+        public void setItem(E item) {
+            this.item = item;
+        }
+
+        public Node<E> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<E> next) {
+            this.next = next;
+        }
+
+
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
             this.next = next;
             this.prev = prev;
         }
-    }
 
+
+    }
 
     @Override
     public void add(E value) {
-        length++;
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, value, null);
+        Node<E> l = last;
+        l.setItem(value);
+        Node<E> newNode = new Node<>(l.prev, null, null);
         last = newNode;
-        if (l == null) {
-            first = newNode;
-            container[size] = value;
-        } else {
-            l.next = newNode;
-            container[size] = value;
-        }
+        l.setNext(last);
         size++;
         modCount++;
     }
 
     @Override
     public E get(int index) {
-        E rsl = null;
-        if (index != -1) {
-            Objects.checkIndex(index, container.length);
-            rsl = container[index];
+        Node<E> target = first.getNext();
+        for (int i = 0; i < index; i++) {
+            target = getNodCurrent(target);
         }
-        return rsl;
+        return target.getItem();
+    }
+
+    public Node<E> getNodCurrent(Node<E> current) {
+        return current.getNext();
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
             private final int expectedModCount = modCount;
-            private int cursor;
+            private int cursor = 0;
+
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
-                      throw new ConcurrentModificationException();
+                    throw new ConcurrentModificationException();
                 }
-                return cursor < container.length && container[cursor] != null;
+                return cursor <= size;
             }
 
             @Override
             public E next() {
-                if (!hasNext() || modCount == 0) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[cursor++];
+                return first.getItem();
             }
         };
     }
