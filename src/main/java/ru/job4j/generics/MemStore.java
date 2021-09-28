@@ -14,10 +14,8 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     private String indexOf(String id) {
         String rsl = null;
-        for (String key : mem.keySet()) {
-            if (key.equals(id)) {
-                rsl = key;
-            }
+        if (mem.get(id) != null) {
+                rsl = id;
         }
         return rsl;
     }
@@ -45,10 +43,8 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         String rsl = null;
-        for (String key : mem.keySet()) {
-            if (key.equals(id)) {
-                rsl = key;
-            }
+        if (mem.get(id) != null) {
+            rsl = id;
         }
         return mem.get(rsl);
     }

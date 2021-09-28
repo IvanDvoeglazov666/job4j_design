@@ -11,27 +11,16 @@ public class UserStore<User extends Base> implements Store<User> {
 
     @Override
     public boolean replace(String id, User model) {
-        User in = findById(id);
-        if (in != null) {
-            store.add(model);
-        }
-        return false;
+        return store.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-        User user = findById(id);
-        boolean rsl = user != null;
-        if (rsl) {
-            store.delete(id);
-        }
-
-        return rsl;
+         return store.delete(id);
     }
 
     @Override
     public User findById(String id) {
-        User rsl = store.findById(id);
-        return rsl;
+          return store.findById(id);
     }
 }
