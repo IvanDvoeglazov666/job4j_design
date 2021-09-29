@@ -13,10 +13,15 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    public T[] arrayAdd(T[] array) {
+         return Arrays.copyOf(array, size + 1);
+    }
+
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, size + 1);
+            arrayAdd(container);
+            container = arrayAdd(container);
             container[size] = value;
             size = size + 1;
         } else {
