@@ -9,7 +9,6 @@ public class SimpleLinkedList<E> implements List<E> {
     private Node<E> last;
     private int modCont;
 
-
     public SimpleLinkedList() {
         this.last = new Node<>(first, null, null);
         this.first = new Node<>(null, null, last);

@@ -31,7 +31,6 @@ public class SimpleLinkedListTest {
         List<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
-
         Iterator<Integer> first = list.iterator();
         assertThat(first.hasNext(), Is.is(true));
         assertThat(first.next(), Is.is(1));
