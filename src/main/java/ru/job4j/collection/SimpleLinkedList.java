@@ -1,95 +1,101 @@
 package ru.job4j.collection;
 
-
 import java.util.*;
 
 public class SimpleLinkedList<E> implements List<E> {
 
-    private int size = 0;
+    private int size;
     private Node<E> first;
     private Node<E> last;
-    private int modCount;
+    private int modCont;
+
 
     public SimpleLinkedList() {
-        this.first = new Node<>(null, null, last);
         this.last = new Node<>(first, null, null);
+        this.first = new Node<>(null, null, last);
+
     }
 
-    private static class Node<E> {
-        E item;
-        Node<E> next;
-        Node<E> prev;
+    public static class Node<E> {
+        private E element;
+        private final Node<E> prevNode;
+        private Node<E> nextNode;
 
-        public E getItem() {
-            return item;
+        private Node(Node<E> prevNode, E element, Node<E> nextNode) {
+            this.element = element;
+            this.prevNode = prevNode;
+            this.nextNode = nextNode;
         }
 
-        public void setItem(E item) {
-            this.item = item;
+        public E getElement() {
+            return element;
         }
 
-        public Node<E> getNext() {
-            return next;
+        public void setElement(E element) {
+            this.element = element;
         }
 
-        public void setNext(Node<E> next) {
-            this.next = next;
+        public Node<E> getNextNode() {
+            return nextNode;
         }
 
-
-        Node(Node<E> prev, E element, Node<E> next) {
-            this.item = element;
-            this.next = next;
-            this.prev = prev;
+        public void setNextNode(Node<E> nextNode) {
+            this.nextNode = nextNode;
         }
-
-
     }
 
     @Override
     public void add(E value) {
         Node<E> l = last;
-        l.setItem(value);
-        Node<E> newNode = new Node<>(l.prev, null, null);
+        l.setElement(value);
+        Node<E> newNode = new Node<>(l, null, null);
         last = newNode;
-        l.setNext(last);
+        l.setNextNode(last);
         size++;
-        modCount++;
+        modCont++;
     }
 
     @Override
     public E get(int index) {
-        Node<E> target = first.getNext();
-        for (int i = 0; i < index; i++) {
-            target = getNodCurrent(target);
+
+        if (Objects.checkIndex(index, size) >= size) {
+            throw new IndexOutOfBoundsException("index greater than length");
         }
-        return target.getItem();
+        Node<E> target = first.getNextNode();
+        for (int i = 0; i < index; i++) {
+            target = getNext(target);
+        }
+        return target.getElement();
     }
 
-    public Node<E> getNodCurrent(Node<E> current) {
-        return current.getNext();
+    public Node<E> getNext(Node<E> df) {
+        return df.getNextNode();
+    }
+
+    @Override
+    public int size() {
+        return size;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private final int expectedModCount = modCount;
+            private final int expectedModCount = modCont;
             private int cursor = 0;
 
             @Override
             public boolean hasNext() {
-                if (expectedModCount != modCount) {
+                if (expectedModCount != modCont) {
                     throw new ConcurrentModificationException();
                 }
-                return cursor <= size;
+                return cursor < size;
             }
-
             @Override
             public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return first.getItem();
+                return get(cursor++);
             }
         };
     }
