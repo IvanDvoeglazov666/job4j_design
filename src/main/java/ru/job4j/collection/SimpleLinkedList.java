@@ -12,7 +12,6 @@ public class SimpleLinkedList<E> implements List<E> {
     public SimpleLinkedList() {
         this.last = new Node<>(first, null, null);
         this.first = new Node<>(null, null, last);
-
     }
 
     public static class Node<E> {
@@ -56,7 +55,6 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-
         if (Objects.checkIndex(index, size) >= size) {
             throw new IndexOutOfBoundsException("index greater than length");
         }
@@ -69,11 +67,6 @@ public class SimpleLinkedList<E> implements List<E> {
 
     public Node<E> getNext(Node<E> df) {
         return df.getNextNode();
-    }
-
-    @Override
-    public int size() {
-        return size;
     }
 
     @Override
