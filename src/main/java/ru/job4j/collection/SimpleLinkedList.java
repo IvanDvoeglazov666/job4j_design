@@ -55,19 +55,14 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        if (Objects.checkIndex(index, size) >= size) {
-            throw new IndexOutOfBoundsException("index greater than length");
-        }
+        Objects.checkIndex(index, size);
         Node<E> target = first.getNextNode();
         for (int i = 0; i < index; i++) {
-            target = getNext(target);
+            //target = (target);
         }
         return target.getElement();
     }
 
-    public Node<E> getNext(Node<E> df) {
-        return df.getNextNode();
-    }
 
     @Override
     public Iterator<E> iterator() {
@@ -82,6 +77,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 }
                 return cursor < size;
             }
+
             @Override
             public E next() {
                 if (!hasNext()) {
