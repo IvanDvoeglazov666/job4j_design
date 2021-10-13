@@ -8,7 +8,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     private final int[] data;
     private int cursor;
 
-
     public EvenNumbersIterator(int[] data) {
         this.data = data;
     }
