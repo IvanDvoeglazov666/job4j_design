@@ -19,6 +19,7 @@ public class SimpleArrayList<T> implements List<T> {
         return Arrays.copyOf(array, size * 2);
     }
 
+
     @Override
     public void add(T value) {
         if (size == container.length) {
