@@ -14,7 +14,7 @@ public class SimpleLinkedList<E> implements List<E> {
         this.first = new Node<>(null, null, last);
     }
 
-    public static class Node<E> {
+    private static class Node<E> {
         private E element;
         private final Node<E> prevNode;
         private Node<E> nextNode;
@@ -58,7 +58,7 @@ public class SimpleLinkedList<E> implements List<E> {
         Objects.checkIndex(index, size);
         Node<E> target = first.getNextNode();
         for (int i = 0; i < index; i++) {
-            //target = (target);
+            target = target.getNextNode();
         }
         return target.getElement();
     }
@@ -83,7 +83,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(cursor++);
+                return get(cursor);
             }
         };
     }
