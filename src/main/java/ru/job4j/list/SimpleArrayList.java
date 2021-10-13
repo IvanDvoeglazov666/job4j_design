@@ -33,8 +33,6 @@ public class SimpleArrayList<T> implements List<T> {
         }
         container = Arrays.copyOf(container, size);
         modCount++;
-
-
     }
 
     @Override
