@@ -54,7 +54,6 @@ public class SimpleArrayList<T> implements List<T> {
         return rsl;
 
     }
-
     @Override
     public T get(int index) {
         Objects.checkIndex(index, size);
