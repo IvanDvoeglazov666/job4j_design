@@ -12,7 +12,6 @@ import java.util.stream.IntStream;
 public class SimpleArrayListTest {
 
     List<Integer> list;
-
     @Before
     public void initData() {
         list = new SimpleArrayList<>(5);

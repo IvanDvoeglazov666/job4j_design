@@ -4,7 +4,6 @@ import java.util.*;
 
 public class SimpleArrayList<T> implements List<T> {
 
-
     private T[] container;
     private int size;
     private int modCount;
@@ -15,7 +14,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     private T[] arrayAdd(T[] array) {
         if (container.length == 0) {
-            container = (T[]) new Object[2];
+            container = (T[]) new Object[4];
         }
         return Arrays.copyOf(array, size * 2);
     }
@@ -40,12 +39,6 @@ public class SimpleArrayList<T> implements List<T> {
     public T set(int index, T newValue) {
         Objects.checkIndex(index, size);
         T rsl = container[index];
-        for (T num : container) {
-            if (container[index].equals(num)) {
-                container[index] = newValue;
-                break;
-            }
-        }
         return rsl;
     }
 
