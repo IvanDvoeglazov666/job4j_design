@@ -22,7 +22,6 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddThenSizeIncrease() {
-
         Assert.assertEquals(3, list.size());
     }
 
@@ -38,9 +37,11 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenRemoveThenGetValueAndSizeDecrease() {
-        Assert.assertEquals(3, list.size());
-        Assert.assertEquals(Integer.valueOf(2), list.remove(1));
-        Assert.assertEquals(2, list.size());
+         Assert.assertEquals(3, list.size());
+         Assert.assertEquals(Integer.valueOf(1), list.get(0));
+         Assert.assertEquals(Integer.valueOf(2), list.get(1));
+         Assert.assertEquals(Integer.valueOf(2), list.remove(1));
+         Assert.assertEquals(2, list.size());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)

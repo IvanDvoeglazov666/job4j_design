@@ -9,51 +9,56 @@ public class SimpleArrayList<T> implements List<T> {
     private int modCount;
 
     public SimpleArrayList(int capacity) {
-        this.container = (T[]) new Object[capacity];
+        this.container =  (T[]) new  Object[capacity];
     }
 
-    private T[] arrayAdd(T[] array) {
+    private void arrayAdd(T[] array) {
         if (container.length == 0) {
-            container = (T[]) new Object[4];
+            container = (T[]) new Object[2];
+        } else {
+           container = Arrays.copyOf(array, size * 2);
         }
-        return Arrays.copyOf(array, size * 2);
     }
 
 
     @Override
     public void add(T value) {
         if (size == container.length) {
-            arrayAdd(container);
-            container = arrayAdd(container);
-            container[size] = value;
-            size = size + 1;
+           arrayAdd(container);
+           container[size] = value;
+           size++;
         } else {
             container[size] = value;
-            size++;
+            size = size + 1;
         }
-        container = Arrays.copyOf(container, size);
+        container = Arrays.copyOf(container, container.length);
         modCount++;
     }
 
     @Override
     public T set(int index, T newValue) {
         Objects.checkIndex(index, size);
+        add(newValue);
         T rsl = container[index];
+        size--;
         return rsl;
     }
 
     @Override
     public T remove(int index) {
         Objects.checkIndex(index, size);
-        T rsl = container[index];
+        T rsl  = container[index];
         if (container[index] != null) {
             System.arraycopy(container, index + 1, container, index, container.length - index - 1);
-            container = Arrays.copyOf(container, size - 1);
+            container[container.length - 1] = null;
+            size--;
+            container = Arrays.copyOf(container, size);
             modCount++;
         }
-        return rsl;
 
+        return rsl;
     }
+
     @Override
     public T get(int index) {
         Objects.checkIndex(index, size);
@@ -62,7 +67,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public int size() {
-        return container.length;
+        return size;
     }
 
     @Override
