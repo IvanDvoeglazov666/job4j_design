@@ -37,7 +37,6 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public T set(int index, T newValue) {
         Objects.checkIndex(index, size);
-        //container[index] = newValue;
         T rsl = container[index];
         modCount++;
         return rsl;
