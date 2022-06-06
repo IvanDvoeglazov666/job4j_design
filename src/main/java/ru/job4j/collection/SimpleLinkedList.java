@@ -30,7 +30,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     public E get(int index) {
         Objects.checkIndex(index, size);
         Node<E> i = first;
-        Node<E> x = last;
         Node<E> current = first;
         for (int a = 0; a < size; a++) {
             if (index == 0) {
