@@ -36,9 +36,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
             if (index == 0) {
                 current = i;
                 break;
-            } else if (index == (size - 1)) {
-                current = x;
-                break;
             } else if (a == index) {
                 current = current.next;
                 break;
