@@ -12,7 +12,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private Node<E> last;
     private int modCount;
 
-
     @Override
     public void add(E value) {
         Node<E> l = last;
@@ -39,8 +38,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         } else if (index == (size - 1)) {
             rsl = x;
             return rsl.item;
-        } else if (index > 0) {
-            first.next = i;
         }
         return rsl.item;
     }
