@@ -95,4 +95,13 @@ public class SimpleLinkedListTest {
         assertThat(list.get(0), Is.is(1));
         assertThat(list.get(1), Is.is(2));
     }
+
+    @Test
+    public void whenGetItemMore() {
+        LinkedList<Integer> list = new SimpleLinkedList<>();
+        list.add(4);
+        list.add(6);
+        assertThat(list.get(0), Is.is(4));
+        assertThat(list.get(1), Is.is(6));
+    }
 }

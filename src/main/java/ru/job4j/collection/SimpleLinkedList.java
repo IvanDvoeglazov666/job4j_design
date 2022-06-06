@@ -68,6 +68,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     }
 
     private static class Node<E> {
+
         E item;
         Node<E> next;
         Node<E> prev;
