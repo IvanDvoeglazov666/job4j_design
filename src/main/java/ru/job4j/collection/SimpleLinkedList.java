@@ -34,10 +34,8 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         Node<E> rsl = null;
         if (index == 0) {
             rsl = i;
-            return rsl.item;
         } else if (index == (size - 1)) {
             rsl = x;
-            return rsl.item;
         }
         return rsl.item;
     }
