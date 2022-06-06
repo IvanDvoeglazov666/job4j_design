@@ -31,13 +31,22 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         Objects.checkIndex(index, size);
         Node<E> i = first;
         Node<E> x = last;
-        Node<E> rsl = null;
-        if (index == 0) {
-            rsl = i;
-        } else if (index == (size - 1)) {
-            rsl = x;
+        Node<E> current = first;
+        for (int a = 0; a < size; a++) {
+            if (index == 0) {
+                current = i;
+                break;
+            } else if (index == (size - 1)) {
+                current = x;
+                break;
+            } else if (a == index) {
+                current = current.next;
+                break;
+            } else if (a > 0) {
+                current = current.next;
+            }
         }
-        return rsl.item;
+        return current.item;
     }
 
     @Override

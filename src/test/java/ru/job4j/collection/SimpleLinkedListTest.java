@@ -14,8 +14,12 @@ public class SimpleLinkedListTest {
         LinkedList<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
+        list.add(3);
+        list.add(4);
         assertThat(list.get(0), Is.is(1));
         assertThat(list.get(1), Is.is(2));
+        assertThat(list.get(2), Is.is(3));
+        assertThat(list.get(3), Is.is(4));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -87,21 +91,4 @@ public class SimpleLinkedListTest {
         assertThat(second.hasNext(), Is.is(false));
     }
 
-    @Test
-    public void whenGetItem() {
-        LinkedList<Integer> list = new SimpleLinkedList<>();
-        list.add(1);
-        list.add(2);
-        assertThat(list.get(0), Is.is(1));
-        assertThat(list.get(1), Is.is(2));
-    }
-
-    @Test
-    public void whenGetItemMore() {
-        LinkedList<Integer> list = new SimpleLinkedList<>();
-        list.add(4);
-        list.add(6);
-        assertThat(list.get(0), Is.is(4));
-        assertThat(list.get(1), Is.is(6));
-    }
 }
