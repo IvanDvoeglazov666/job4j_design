@@ -29,15 +29,9 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> i = first;
         Node<E> current = first;
-        for (int a = 0; a <= index; a++) {
-            if (index == 0) {
-                current = i;
-                break;
-            } else if (a > 0) {
-                current = current.next;
-            }
+        for (int a = 0; a < index; a++) {
+            current = current.next;
         }
         return current.item;
     }
